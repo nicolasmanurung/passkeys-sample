@@ -9,4 +9,5 @@ interface ChallengeGenerator {
 
     fun generateChallenge(): String
 
+    fun generateId(): String
 }

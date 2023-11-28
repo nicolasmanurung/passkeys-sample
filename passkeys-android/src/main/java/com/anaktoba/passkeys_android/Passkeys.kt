@@ -25,8 +25,8 @@ class Passkeys(
         requestJson: String,
         activity: Activity,
         executor: Executor,
-        onSuccessCallback: (CreateCredentialResponse) -> Unit = {},
-        onErrorCallback: () -> Unit = {},
+        onSuccessCallback: (String) -> Unit = {},
+        onErrorCallback: (String) -> Unit = {},
     ) {
 
         credentialManager.createCredentialAsync(
@@ -37,13 +37,12 @@ class Passkeys(
             callback = object :
                 CredentialManagerCallback<CreateCredentialResponse, CreateCredentialException> {
                 override fun onError(e: CreateCredentialException) {
-                    onErrorCallback.invoke()
+                    onErrorCallback.invoke(e.toString())
                 }
 
                 override fun onResult(result: CreateCredentialResponse) {
-                    onSuccessCallback.invoke(result)
+                    onSuccessCallback.invoke(result.toString())
                 }
-
             }
         )
     }

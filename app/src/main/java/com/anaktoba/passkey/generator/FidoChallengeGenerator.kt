@@ -18,4 +18,13 @@ class FidoChallengerGenerator : ChallengeGenerator {
             Base64.NO_PADDING or Base64.NO_WRAP or Base64.URL_SAFE
         )
     }
+
+    override fun generateId(): String {
+        val idBytes = ByteArray(64)
+        secureRandom.nextBytes(idBytes)
+        return Base64.encodeToString(
+            idBytes,
+            Base64.NO_PADDING or Base64.NO_WRAP or Base64.URL_SAFE
+        )
+    }
 }
